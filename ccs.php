@@ -15,8 +15,9 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-// check if woocommerce is active
-
+/**
+ * check if woocommerce is active
+ */
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
 	function show_cross_sell_in_single_product()
 	{
@@ -55,29 +56,30 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 			 */
 			'update_post_term_cache' => false
 		);
+
 		$products = new WP_Query($args);
 
-		// check if product has posts, otherwise always true
-
+		/**
+		 * check if product has posts, otherwise always true
+		 */
 		if ($products->have_posts()): ?>
 
-        <section class="related products">
+        		<section class="related products">
 
-          <h2><?php esc_html_e('Passend dazu', 'woocommerce'); ?></h2>
+          		<h2><?php esc_html_e('Passend dazu', 'woocommerce'); ?></h2>
 
-					<?php woocommerce_product_loop_start(); ?>
+			<?php woocommerce_product_loop_start(); ?>
 
-          <?php
-					while ($products->have_posts()): $products->the_post();
-						wc_get_template_part('content', 'product');
-					endwhile; // end of the loop.
-					?>
+          		<?php while ($products->have_posts()): $products->the_post();
+				wc_get_template_part('content', 'product');
+			endwhile; ?>
 
-          <?php woocommerce_product_loop_end(); ?>
+          		<?php woocommerce_product_loop_end(); ?>
 
-        </section>
+        		</section>
 
-      <?php endif;
+      		<?php endif;
+
 		wp_reset_postdata();
 	}
 
