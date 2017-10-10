@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Custom Schirm Zubehör
-Plugin URI: https://github.com/agcty
-Description: Have your custom zubehör shown on the single product page
+Plugin Name: Custom Cross simplexml_load_string
+Plugin URI: https://github.com/agcty/wc-ccc
+Description: Have your cross-sells shown on the single product page template, specifically tested for shopkeeper wordpress theme
 Author: Alex Gogl
 Author URI: https://gogl.io
-Version: 0.1.1
-Text Domain: schirm-zubehoer
+Version: 0.1.2
+Text Domain: ccc-agcty
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -15,19 +15,26 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+//check if woocommerce is active
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 
     function show_cross_sell_in_single_product()
     {
+				//get the cross_sell_ids of the current viewn product
         global $product;
         $crosssells = $product->get_cross_sell_ids();
-    
+
+				//check if crosssells is empty, if there was no check WP_Query would still provide results
+				//and would show you random products as cross sells
         if (empty($crosssells)) {
             return;
         }
 
         $args = array(
             'post_type' => 'product',
+						//change to -1 if all cross sells of this product should be shown
+						//-1 is not recommended for shopkeeper theme unless you have exactly
+						//four cross sells for a product
             'posts_per_page' => 4,
             'post__in' => $crosssells,
             /**
@@ -47,7 +54,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         );
 
         $products = new WP_Query($args);
-        //check if products has posts, otherwise always true
+
+        //check if product has posts, otherwise always true
         if ($products->have_posts()): ?>
 
         <section class="related products">
