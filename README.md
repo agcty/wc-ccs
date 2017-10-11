@@ -13,4 +13,6 @@ The code should look somewhat like this:
 Find something similar to ```<section class="related products">``` or ```<div class="someotherclasses">``` and change the corresponding lines in the ccs.php file of this repository. Additionally if you want to change the heading of this section just change the ```<h2>``` value to something you like.
 
 ## How to use it?
-Either download ccs.php then change it to your needs, put it in a folder and upload to your plugins section with ftp, or do everything except the ftp part, compress it to a zip file and upload it on your wordpress site.
+Either download ccs.php then change it to your needs, put it in a folder and upload to your plugins section with ftp, or do everything except the ftp part, compress it to a zip file and upload it to your wordpress site.
+
+Thanks to <a href="https://codereview.stackexchange.com/users/53576/welcher">Welcher</a> for pointing out some performance issues and reviewing the code.
