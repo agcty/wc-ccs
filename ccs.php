@@ -63,19 +63,25 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
          * check if product has posts, otherwise always true
          */
         if ($products->have_posts()): ?>
-      		<section class="related products">
-        		<h2>
-							<?php esc_html_e('Passend dazu', 'woocommerce'); ?>
-						</h2>
+				<div class="single_product_summary_upsell">
+			    <div class="row">
+						<div class="xlarge-9 xlarge-centered columns">
+		      		<section class="related products">
+		        		<h2>
+									<?php esc_html_e('Passend dazu', 'woocommerce'); ?>
+								</h2>
 
-						<?php woocommerce_product_loop_start(); ?>
-							<?php while ($products->have_posts()): $products->the_post();
-	      	  		wc_get_template_part('content', 'product');
-	        		endwhile; ?>
-						<?php woocommerce_product_loop_end(); ?>
-					</section>
+								<?php woocommerce_product_loop_start(); ?>
+									<?php while ($products->have_posts()): $products->the_post();
+			      	  		wc_get_template_part('content', 'product');
+			        		endwhile; ?>
+								<?php woocommerce_product_loop_end(); ?>
+							</section>
+						</div>
+					</div>
+				</div>
 				<?php endif;
-				
+
         wp_reset_postdata();
     }
 
